@@ -1,6 +1,7 @@
 from flask import Flask, request, make_response
 from faunadb import query as q
 from admin_controls.admin_codes import client
+from django.http import HttpResponse
 from ussd_codes.ussd_codes import replies
 
 app = Flask(__name__)
@@ -36,7 +37,7 @@ def hook():
 
         response = replies(mobile, text)
         print(response)
-    return response
+    return HttpResponse(response)
 
 if __name__ == '__main__': 
     app.run(debug=True)
