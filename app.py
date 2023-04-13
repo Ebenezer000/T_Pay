@@ -23,6 +23,14 @@ app = Flask(__name__)
 @app.route("/ussd", methods=["GET", "POST"])
 def index():
     response = ""
+    resp
+    data = f"""
+{
+  "appId": "T_pay",
+  "msisdn": "2348177642325",
+  "contextData": {response}
+}
+"""
     if request.method == "GET":
         response = "Hello it works wonders"
     if request.method == 'POST' :
