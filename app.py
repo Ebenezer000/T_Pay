@@ -11,14 +11,17 @@ def index():
 
 @app.route("/ussd", methods=["GET", "POST"])
 def hook():
-
+    print("level 1")
     if request.method == 'POST':
+        print("level 2")
         mobile = request.POST.get('phoneNumber')
         text = request.POST.get('text')
         
         try:
+            print("level 3")
             client.query(q.get(q.match(q.index("loginData"), mobile)))
         except:
+            print("level 4")
             client.query(q.create(q.ref(q.collection("userData"), mobile), {
                 "data": {
                 "id": mobile,
