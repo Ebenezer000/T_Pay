@@ -1,9 +1,7 @@
-import os
 from flask import Flask, request, make_response
 from faunadb import query as q
 from admin_controls.admin_codes import client
 from ussd_codes.ussd_codes import replies
-
 
 app = Flask(__name__)
 
@@ -11,7 +9,7 @@ app = Flask(__name__)
 def index():
     return "Hello, It Works"
 
-@app.route("/ussd", methods = ['POST'])
+@app.route("/ussd", methods=["GET", "POST"])
 def hook():
     if request.method == 'POST':
         mobile = request.values.get('phoneNumber')
