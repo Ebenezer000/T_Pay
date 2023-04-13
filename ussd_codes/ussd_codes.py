@@ -15,7 +15,7 @@ def get_user_reply(ussd, reply) -> str:
     return user_reply
 
 
-def replies(mobile, text) -> str:
+def replies(mobile, text):
 
     using = client.query(q.get(q.ref(q.collection("userData"), mobile)))
     trans_acc = using["data"]["trans_acc"]
