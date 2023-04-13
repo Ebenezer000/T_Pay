@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return "Hello, It Works"
 
-@app.route("/ussd", methods=["GET", "POST"])
+@app.route("/ussd", methods = ['POST'])
 def hook():
     if request.method == 'POST':
         mobile = request.values.get('phoneNumber')
