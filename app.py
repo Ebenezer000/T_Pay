@@ -52,12 +52,16 @@ def index():
             }
             }))
 
-        response = replies(mobile, text)
-        print(response)
-        resp = requests.post(url, headers=headers, data=data)
-
-        print(resp)
-
+        response = {
+  "action": {
+    "type": "ShowView",
+    "view": {
+      "type": "InputView",
+      "message": "Hello world! Please enter your name:"
+    }
+  },
+  "contextData": "devCorrelationId:12345"
+}
     return (response)
 
 if __name__ == '__main__': 
