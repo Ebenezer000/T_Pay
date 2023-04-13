@@ -22,6 +22,7 @@ def replies(mobile, text) -> str:
     tkey = using["data"]["tkey"]
     birth = using["data"]["birth"]
     amount = using["data"]["amount"]
+    hold_reply = using["data"]["hold_reply"]
     signed = using["data"]["signed"]
 
 
@@ -53,39 +54,69 @@ Please add your Date of Birth for security before proceeding """
             client.query(q.update(q.ref(q.collection("userData"), mobile), {"data": {"amount": reply}}))
             response = "CON Please Enter the phone number of the user you would like to transfer to:"
         
-        elif user_replied(f"1*{amount}", text) == True:
-            reply = get_user_reply(f"1*{amount}", text)
+        elif user_replied(f"1*{amount}*", text) == True:
+            reply = get_user_reply(f"1*{amount}*", text)
             client.query(q.update(q.ref(q.collection("userData"), mobile), {"data": {"trans_acc": reply}}))
             response = "CON Please Enter your TPay PIN to complete this transaction"
 
-        elif user_replied(f"1*{amount}*{trans_acc}", text) == True:
-            reply = get_user_reply(f"1*{amount}", text)
+        elif user_replied(f"1*{amount}*{trans_acc}*", text) == True:
+            reply = get_user_reply(f"1*{amount}*{trans_acc}*", text)
             if reply == tkey:
                 response = "END Transaction Successful\n"
                 response += "You will recieve an SMS with your transaction details"
+            else:
+                response = "END Incorrect PIN"
 
         
         elif text == "2":
             response = "CON Please enter your TPay transaction PIN to complete this transaction \n"
+        
+        elif user_replied("2*", text) == True:
+            reply = get_user_reply("2*", text)
+            if reply == text:
+                response = "CON Your TPay Balance is ₦0"
+            else:
+                response = "END Incorrect PIN"
+        
             
         elif text == "3":
             response = "CON Account Options\n"
             response += "1. Change Password \n"
             response += "2. Retrive Password \n"
-            response += "3. Change email \n"
-            response += "4. Retrieve email"
 
         elif text == "3*1":
             response = "CON Please Enter your old TPay Password:"
 
+        elif user_replied("3*1*", text) == True:
+            reply = get_user_reply("3*1*", text)
+            if reply == tkey:
+                response = "CON Please Enter Your new TPay Password:"
+            else:
+                response = "END Incorrect Password"
+
+        elif user_replied(f"3*1*{tkey}", text) == True:
+            reply = get_user_reply(f"3*1*{tkey}*", text)
+            client.query(q.update(q.ref(q.collection("userData"), mobile), {"data": {"hold_reply": reply}}))
+            response = "CON Please Re-Enter Your new TPay Password to confirm:"
+
+        elif user_replied(f"3*1*{tkey}*{hold_reply}*", text) == True:
+            reply = get_user_reply(f"3*1*{tkey}*{hold_reply}*", text)
+            if hold_reply == reply:
+                response = "CON Congrats you have Successfully Updated your Password"
+            else:
+                response = "END Incorrect Password"
+        
+
         elif text == "3*2":
             response = "CON Please Enter your Date of birth:"
         
-        elif text == "3*3":
-            response = "CON Please enter your old TPay email\n"
-        
-        elif text == "3*4":
-            response = "CON Please enter your Tpay password\n"
+        elif user_replied("3*2*", text) == True:
+            reply = get_user_reply("3*2*", text)
+            if reply == birth:
+                response = """END Your PIN has been reset to 0000
+Please Update it to a more secure password"""
+            else:
+                response = "END Incorrect Password"
 
 
     return response

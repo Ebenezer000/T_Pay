@@ -28,12 +28,15 @@ def hook():
                 "trans_acc": "",
                 "tkey": "",
                 "amount": "",
+                "birth": "",
+                "hold_reply": "",
                 "last_session": "",
                 "signed": ""
             }
             }))
 
         responce = replies(mobile, text)
+        print("all done")
     return responce
 
 if __name__ == '__main__': 
