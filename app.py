@@ -3,7 +3,6 @@ from faunadb import query as q
 from admin_controls.admin_codes import client, headers
 from ussd_codes.ussd_codes import replies
 import requests
-from requests.structures import CaseInsensitiveDict
 
 url = "https://deep.qrios.com/api/v1/ussd/app/push"
 

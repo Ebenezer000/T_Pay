@@ -1,3 +1,4 @@
+from requests.structures import CaseInsensitiveDict
 from faunadb.client import FaunaClient
 
 ############### Admin Codes ###############
