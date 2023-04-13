@@ -1,4 +1,5 @@
 from admin_controls.admin_codes import client, ussd_sender
+from faunadb import query as q
 
 
 #####

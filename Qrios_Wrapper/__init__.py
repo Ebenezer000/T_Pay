@@ -52,7 +52,7 @@ class qrios():
         }
         return data
 
-    def reply_user(self, message) -> dict:
+    def reply_user(self, message):
         data = {
             "action": {
                 "type": "ShowView",

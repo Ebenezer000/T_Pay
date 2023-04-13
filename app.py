@@ -6,24 +6,23 @@ import requests
 
 app = Flask(__name__)
 
-@app.route("/", methods=["POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     print("it works")
 
-@app.route("/ussdSessionEvent/new", methods=["POST"])
+@app.route("/ussdSessionEvent/new", methods=["GET", "POST"])
 def start():
-    print("stage 1")
     start_convo.replies(request)    
 
-@app.route("/ussdSessionEvent/continue", methods=["POST"])
+@app.route("/ussdSessionEvent/continue", methods=["GET", "POST"])
 def continue_reply():
     continue_convo.replies(request)
 
-@app.route("/ussdSessionEvent/close", methods=["POST"])
+@app.route("/ussdSessionEvent/close", methods=["GET", "POST"])
 def close():
     close_convo.replies(request)
 
-@app.route("/ussdSessionEvent/abort", methods=["POST"])
+@app.route("/ussdSessionEvent/abort", methods=["GET", "POST"])
 def abort():
     abort_convo.replies(request)
 
