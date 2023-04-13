@@ -31,7 +31,8 @@ def hook(request):
             }
             }))
 
-        replies(mobile, text)
+        responce = replies(mobile, text)
+    return responce
 
 if __name__ == '__main__': 
     app.run(debug=True)
