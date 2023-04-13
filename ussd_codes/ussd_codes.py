@@ -29,9 +29,8 @@ def replies(mobile, text):
     response =""
 
     if signed == "" :
-        response = f"""WELCOME TO TPAY
-
-Please set up your TPay PIN to use this service """
+        response = "WELCOME TO TPAY\n\n"
+        response += "Please set up your TPay PIN to use this service "
 
     elif signed != "" and birth == "":
         response = f"""WELCOME TO TPAY
