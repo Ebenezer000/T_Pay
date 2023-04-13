@@ -16,7 +16,7 @@ def replies(request):
     if signed == "":
         ussd_sender.reply_user(message=f"""WELCOME TO TPAY
 
-Please set up your TPay PIN to use this service """)
+Please set up your TPay PINs to use this service """)
 
     else:
         ussd_sender.reply_user(
