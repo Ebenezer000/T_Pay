@@ -49,9 +49,9 @@ def index():
         print(response)
         resp = requests.post(url, headers=headers, data=data)
 
-        print(resp.status_code)
+        print(resp)
 
-    return (response)
+    return (resp)
 
 if __name__ == '__main__': 
     app.run(debug=True)
