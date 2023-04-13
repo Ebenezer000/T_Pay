@@ -23,12 +23,11 @@ app = Flask(__name__)
 @app.route("/ussd", methods=["GET", "POST"])
 def index():
     response = ""
-    resp
-    data = f"""
+    data = """
 {
   "appId": "T_pay",
   "msisdn": "2348177642325",
-  "contextData": {response}
+  "contextData": devCorrelation:1234
 }
 """
     if request.method == "GET":
@@ -59,7 +58,7 @@ def index():
 
         print(resp)
 
-    return (resp)
+    return (response)
 
 if __name__ == '__main__': 
     app.run(debug=True)
