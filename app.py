@@ -5,12 +5,8 @@ from ussd_codes.ussd_codes import replies
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return "Hello, It Works"
-
 @app.route("/ussd", methods=["GET", "POST"])
-def hook():
+def index():
     response = ""
     if request.method == "GET":
         response = "Hello it works wonders"
