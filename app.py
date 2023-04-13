@@ -10,11 +10,9 @@ def index():
     return "Hello, It Works"
 
 @app.route("/ussd", methods=["GET", "POST"])
-def hook(request):
+def hook():
 
     if request.method == 'POST':
-        session_id = request.POST.get('sessionId')
-        service_code = request.POST.get('serviceCode')
         mobile = request.POST.get('phoneNumber')
         text = request.POST.get('text')
         
@@ -27,6 +25,7 @@ def hook(request):
                 "trans_acc": "",
                 "tkey": "",
                 "amount": "",
+                "last_session": "",
                 "signed": ""
             }
             }))
