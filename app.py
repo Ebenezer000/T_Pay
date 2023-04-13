@@ -1,49 +1,30 @@
 from flask import Flask, request, make_response
 from faunadb import query as q
-from admin_controls.admin_codes import client
-from ussd_codes.ussd_codes import replies
+from ussd_codes import abort_convo, start_convo, continue_convo , close_convo
 import requests
 
 
 app = Flask(__name__)
 
-@app.route("/ussd", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
-    response = ""
+    print("it works")
 
-    if request.method == "GET":
-        response = "Hello it works wonders"
-    if request.method == 'POST' :
-        mobile = request.values.get('phoneNumber')
-        text = request.values.get('text')
-        
-        try:
-            client.query(q.get(q.match(q.index("loginData"), mobile)))
-        except:
-            client.query(q.create(q.ref(q.collection("userData"), mobile), {
-                "data": {
-                "id": mobile,
-                "trans_acc": "",
-                "tkey": "",
-                "amount": "",
-                "birth": "",
-                "hold_reply": "",
-                "last_session": "",
-                "signed": ""
-            }
-            }))
+@app.route("/ussdSessionEvent/new", methods=["GET", "POST"])
+def start():
+    start_convo.replies(request)    
 
-        response = {
-  "action": {
-    "type": "ShowView",
-    "view": {
-      "type": "InputView",
-      "message": "Hello world! Please enter your name:"
-    }
-  },
-  "contextData": "devCorrelationId:12345"
-}
-    return (response)
+@app.route("/ussdSessionEvent/continue", methods=["GET", "POST"])
+def continue_reply():
+    continue_convo.replies(request)
+
+@app.route("/ussdSessionEvent/close", methods=["GET", "POST"])
+def close():
+    close_convo.replies(request)
+
+@app.route("/ussdSessionEvent/abort", methods=["GET", "POST"])
+def abort():
+    abort_convo.replies(request)
 
 if __name__ == '__main__': 
     app.run(debug=True)
