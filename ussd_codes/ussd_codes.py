@@ -29,7 +29,7 @@ def replies(mobile, text):
     response =""
 
     if signed == "" :
-        response = "WELCOME TO TPAY\n\n"
+        response = "WELCOME TO TPAY\n"
         response += "Please set up your TPay PIN to use this service "
 
     elif signed != "" and birth == "":
