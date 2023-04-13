@@ -2,8 +2,3 @@ Flask
 gunicorn
 requests
 faunadb
-pytesseract
-pillow
-web3
-hexbytes
-phonenumbers
