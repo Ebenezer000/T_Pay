@@ -14,8 +14,8 @@ def hook():
     print("level 1")
     if request.method == 'POST':
         print("level 2")
-        mobile = request.POST.get('phoneNumber')
-        text = request.POST.get('text')
+        mobile = request.values.get('phoneNumber')
+        text = request.values.get('text')
         
         try:
             print("level 3")
