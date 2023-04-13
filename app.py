@@ -11,7 +11,10 @@ def index():
 
 @app.route("/ussd", methods=["GET", "POST"])
 def hook():
-    if request.method == 'POST':
+    response = ""
+    if request.method == "GET":
+        response = "Hello it works wonders"
+    if request.method == 'POST' :
         mobile = request.values.get('phoneNumber')
         text = request.values.get('text')
         
@@ -31,9 +34,9 @@ def hook():
             }
             }))
 
-        responce = replies(mobile, text)
-        print(responce)
-    return responce
+        response = replies(mobile, text)
+        print(response)
+    return response
 
 if __name__ == '__main__': 
     app.run(debug=True)
