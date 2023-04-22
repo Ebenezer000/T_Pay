@@ -1,8 +1,8 @@
+import requests
 ######
 
 class qrios():
     def __init__(self, client_id, client_secret) -> None:
-        self.base_url = "/ussd/app/425*027"
         self.headers = {
             "X-Client-Id": client_id,
             "X-Client-Secret": client_secret,
@@ -17,6 +17,7 @@ class qrios():
             "session": session,
             "mobile": mobile
         }
+        requests.Response
         return data
     
     def get_continued_conversation(self, request) -> dict:
